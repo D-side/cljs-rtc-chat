@@ -37,7 +37,6 @@
 (register-handler :message
  (path [:messages])
  (fn [db [_ id data]]
-  (println id " " data)
   (conj db {:id id
             :data data})))
 
@@ -47,7 +46,6 @@
 
 (register-handler :broadcast
  (fn [db [_ text]]
-   (println text)
    (doseq [[_ channel] (:channels db)]
      (.send channel text))
    (merge db {:messages
